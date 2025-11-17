@@ -10,7 +10,7 @@
       "request": "launch",
       "preLaunchTask": "build",
       // If you have changed target frameworks, make sure to update the program path.
-      "program": "${workspaceFolder}/simples/JT808.Gateway.SimpleServer/bin/Debug/net8.0/JT808.Gateway.SimpleServer.dll",
+      "program": "${workspaceFolder}/simples/JT808.Gateway.SimpleServer/bin/Debug/net10.0/JT808.Gateway.SimpleServer.dll",
       "args": [],
       "cwd": "${workspaceFolder}/simples/JT808.Gateway.SimpleServer",
       "stopAtEntry": false,

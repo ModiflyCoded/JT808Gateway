@@ -2,7 +2,7 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.0.31903.59
-MinimumVisualStudioVersion = 10.0.40219.1
+MinimumVisualStudioVersion = net10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "simples", "simples", "{2459FB59-8A33-49A4-ADBC-A0B12C5886A6}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "JT808.Gateway.SimpleServer", "JT808.Gateway.SimpleServer\JT808.Gateway.SimpleServer.csproj", "{98E1CDD0-4D4E-48FE-968E-260F0CD5F4D3}"
