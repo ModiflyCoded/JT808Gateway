@@ -1,13 +1,13 @@
-﻿using JT808.Gateway.Session;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using Xunit;
-using Microsoft.Extensions.Logging;
-using System.Net.Sockets;
-using System.Threading;
 using System.Diagnostics;
+using System.Net.Sockets;
+using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
+using JT808.Gateway.Session;
+using Microsoft.Extensions.Logging;
+using Xunit;
 
 namespace JT808.Gateway.Test.Session
 {
@@ -17,7 +17,7 @@ namespace JT808.Gateway.Test.Session
         public void TryAddTest()
         {
             JT808SessionManager jT808SessionManager = new JT808SessionManager(new LoggerFactory());
-            var result=jT808SessionManager.TryAdd(new JT808TcpSession(new Socket(SocketType.Stream, ProtocolType.Tcp)));
+            var result = jT808SessionManager.TryAdd(new JT808TcpSession(new Socket(SocketType.Stream, ProtocolType.Tcp)));
             Assert.True(result);
             Assert.Equal(1, jT808SessionManager.TotalSessionCount);
         }
@@ -67,7 +67,7 @@ namespace JT808.Gateway.Test.Session
             jT808SessionManager.TryLink(tno3, session);
             Assert.True(result1);
             Assert.Equal(1, jT808SessionManager.TotalSessionCount);
-            Assert.Equal(3,jT808SessionManager.TerminalPhoneNoSessions.Count);
+            Assert.Equal(3, jT808SessionManager.TerminalPhoneNoSessions.Count);
             jT808SessionManager.RemoveBySessionId(session.SessionID);
             Assert.Equal(0, jT808SessionManager.TotalSessionCount);
             Assert.Empty(jT808SessionManager.TerminalPhoneNoSessions);
@@ -126,7 +126,7 @@ namespace JT808.Gateway.Test.Session
             var result3 = jT808SessionManager.TryAdd(session3);
             jT808SessionManager.TryLink(tno2, session3);
             Assert.True(result3);
-            if (jT808SessionManager.TerminalPhoneNoSessions.TryGetValue(tno2,out var sessionInfo))
+            if (jT808SessionManager.TerminalPhoneNoSessions.TryGetValue(tno2, out var sessionInfo))
             {
                 //实际的通道Id
                 Assert.Equal(session3.SessionID, sessionInfo.SessionID);
@@ -136,7 +136,7 @@ namespace JT808.Gateway.Test.Session
 
             jT808SessionManager.RemoveByTerminalPhoneNo(tno1);
             Assert.Equal(2, jT808SessionManager.TotalSessionCount);
-            Assert.Equal(2,jT808SessionManager.TerminalPhoneNoSessions.Count);
+            Assert.Equal(2, jT808SessionManager.TerminalPhoneNoSessions.Count);
         }
 
         [Fact]
@@ -169,15 +169,11 @@ namespace JT808.Gateway.Test.Session
         [Fact]
         public async Task SendTest()
         {
-            await Assert.ThrowsAsync<SocketException>(async() => 
-            {
-                string tno = "123456";
-                JT808SessionManager jT808SessionManager = new JT808SessionManager(new LoggerFactory());
-                var session = new JT808TcpSession(new Socket(SocketType.Stream, ProtocolType.Tcp));
-                var result1 = jT808SessionManager.TryAdd(session);
-                jT808SessionManager.TryLink(tno, session);
-                await jT808SessionManager.TrySendByTerminalPhoneNoAsync(tno, new byte[] { 0x7e, 0, 0, 0x7e });
-            });
+            string tno = "123456";
+            JT808SessionManager jT808SessionManager = new JT808SessionManager(new LoggerFactory());
+            var session = new JT808TcpSession(new Socket(SocketType.Stream, ProtocolType.Tcp));
+            jT808SessionManager.TryLink(tno, session);
+            Assert.False(await jT808SessionManager.TrySendByTerminalPhoneNoAsync(tno, [0x7e, 0, 0, 0x7e]));
         }
 
         [Fact]

@@ -172,8 +172,8 @@ namespace JT808.Gateway.Session
         {
             if (TerminalPhoneNoSessions.TryGetValue(terminalPhoneNo, out var session))
             {
-                await session.SendAsync(data);
-                return true;
+                var result = await session.SendAsync(data);
+                return result.Success;
             }
             else
             {
@@ -185,8 +185,8 @@ namespace JT808.Gateway.Session
         {
             if (Sessions.TryGetValue(sessionId, out var session))
             {
-                await session.SendAsync(data);
-                return true;
+                var result = await session.SendAsync(data);
+                return result.Success;
             }
             else
             {
