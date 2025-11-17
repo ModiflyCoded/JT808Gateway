@@ -172,14 +172,7 @@ namespace JT808.Gateway.Session
         {
             if (TerminalPhoneNoSessions.TryGetValue(terminalPhoneNo, out var session))
             {
-                if (session.TransportProtocolType == JT808TransportProtocolType.tcp)
-                {
-                    await session.Client.SendAsync(data, SocketFlags.None);
-                }
-                else
-                {
-                    await session.Client.SendToAsync(data, SocketFlags.None, session.RemoteEndPoint);
-                }
+                await session.SendAsync(data);
                 return true;
             }
             else
@@ -192,14 +185,7 @@ namespace JT808.Gateway.Session
         {
             if (Sessions.TryGetValue(sessionId, out var session))
             {
-                if (session.TransportProtocolType == JT808TransportProtocolType.tcp)
-                {
-                    await session.Client.SendAsync(data, SocketFlags.None);
-                }
-                else
-                {
-                    await session.Client.SendToAsync(data, SocketFlags.None, session.RemoteEndPoint);
-                }
+                await session.SendAsync(data);
                 return true;
             }
             else

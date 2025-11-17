@@ -159,6 +159,56 @@
             <param name="session"></param>
             <param name="data"></param>
         </member>
+        <member name="T:JT808.Gateway.Abstractions.JT808SessionExtensions.Result">
+            <summary>
+            结果
+            </summary>
+        </member>
+        <member name="P:JT808.Gateway.Abstractions.JT808SessionExtensions.Result.Success">
+            <summary>
+            是否成功
+            </summary>
+        </member>
+        <member name="P:JT808.Gateway.Abstractions.JT808SessionExtensions.Result.Reason">
+            <summary>
+            失败原因
+            </summary>
+        </member>
+        <member name="P:JT808.Gateway.Abstractions.JT808SessionExtensions.Result.Exception">
+            <summary>
+            异常
+            </summary>
+        </member>
+        <member name="T:JT808.Gateway.Abstractions.JT808SessionExtensions.FailReason">
+            <summary>
+            失败原因
+            </summary>
+        </member>
+        <member name="F:JT808.Gateway.Abstractions.JT808SessionExtensions.FailReason.None">
+            <summary>
+            未知
+            </summary>
+        </member>
+        <member name="F:JT808.Gateway.Abstractions.JT808SessionExtensions.FailReason.EmptyData">
+            <summary>
+            空数据
+            </summary>
+        </member>
+        <member name="F:JT808.Gateway.Abstractions.JT808SessionExtensions.FailReason.SessionNotConnected">
+            <summary>
+            非已连接状态
+            </summary>
+        </member>
+        <member name="F:JT808.Gateway.Abstractions.JT808SessionExtensions.FailReason.SessionInvalidAggregate">
+            <summary>
+            无效的发送参数
+            </summary>
+        </member>
+        <member name="F:JT808.Gateway.Abstractions.JT808SessionExtensions.FailReason.Exception">
+            <summary>
+            未知异常
+            </summary>
+        </member>
         <member name="T:JT808.Gateway.Abstractions.IJT808DownMessageHandler">
             <summary>
             下行消息处理接口
