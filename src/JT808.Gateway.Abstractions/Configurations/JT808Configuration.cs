@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace JT808.Gateway.Abstractions.Configurations
 {
@@ -20,6 +19,7 @@ namespace JT808.Gateway.Abstractions.Configurations
         /// <summary>
         /// http webapi端口
         /// </summary>
+        [Obsolete("因移除dotnetty后,此属性无意义，即将被移除，请使用自带的webapi类型项目替代控制台")]
         public int WebApiPort { get; set; } = 828;
         /// <summary>
         /// WebApi 默认token 123456 

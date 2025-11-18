@@ -21,9 +21,15 @@
 
 ## 基于WebApi的消息业务处理程序
 
-通过继承JT808.Gateway.Handlers.JT808MsgIdDefaultWebApiHandler去实现自定义的WebApi接口服务。
+使用webapi项目集成网关，如[simples/JT808.Gateway.SimpleServer/Program.cs](simples/JT808.Gateway.SimpleServer/Program.cs#L41)
 
-[接口文档](https://github.com/SmallChi/JT808Gateway/tree/master/api)
+**注意**：如果你使用nuget引用的方式，可能会由于控制器扫描规则影响而导致api不生效，因此需要调用`AddApplicationPart`
+
+```c#
+builder.Services.AddControllers().AddApplicationPart(typeof(JT808WebApi).Assembly);
+```
+
+[接口文档](api/README.md)
 
 ## 基于Pipeline
 
