@@ -20,13 +20,17 @@
 > 使用物联网卡通过udp下发指令时，存储的那个socket地址端口，有效期非常短,不速度快点下发，那个socket地址端口就可能映射到别的对应卡去了,所以此处采用跟随设备消息下发指令。
 
 ## 基于WebApi的消息业务处理程序
-
-使用webapi项目集成网关，如[simples/JT808.Gateway.SimpleServer/Program.cs](simples/JT808.Gateway.SimpleServer/Program.cs#L41)
-
-**注意**：如果你使用nuget引用的方式，可能会由于控制器扫描规则影响而导致api不生效，因此需要调用`AddApplicationPart`
+默认不提供api，但如果使用webapi项目集成网关，如[JT808.Gateway.SimpleServer](simples/JT808.Gateway.SimpleServer/Program.cs#L45)，可通过如下方式添加[自带的api](src/JT808.Gateway/JT808GatewayApiExtensions.cs)
 
 ```c#
-builder.Services.AddControllers().AddApplicationPart(typeof(JT808WebApi).Assembly);
+app.UseJT808GatewayWebApi();
+```
+or
+```c#
+app.UseJT808GatewayWebApi(options=>{
+    options.RoutePrefix = "jt808api"; //指定路由前缀
+    options.VerifyAuthorization = true; //启用token鉴权
+});
 ```
 
 [接口文档](api/README.md)

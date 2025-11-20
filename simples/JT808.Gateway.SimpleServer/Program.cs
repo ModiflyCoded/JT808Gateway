@@ -42,6 +42,7 @@ namespace JT808.Gateway.SimpleServer
             var app = builder.Build();
             app.UseRouting();
             app.MapControllers();
+            app.UseJT808GatewayWebApi();
             app.Run();
         }
     }

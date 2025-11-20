@@ -1,6 +1,7 @@
 ﻿# 基于JT808Gateway WebApi 接口文档
 
-基地址：127.0.0.1:828/jt808api/
+基地址：127.0.0.1:5000
+路由前缀：jt808api（如需自定义请调用`UseJT808GatewayWebApi`时进行修改）
 
 > 注意url格式
 

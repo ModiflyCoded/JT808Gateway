@@ -4,16 +4,13 @@
         <name>JT808.Gateway</name>
     </assembly>
     <members>
-        <member name="T:JT808.Gateway.Authorization.JT808TokenAttribute">
+        <member name="T:JT808.Gateway.Authorization.JT808TokenFilter">
             <summary>
-            
+            鉴权过滤器
             </summary>
         </member>
-        <member name="M:JT808.Gateway.Authorization.JT808TokenAttribute.OnAuthorization(Microsoft.AspNetCore.Mvc.Filters.AuthorizationFilterContext)">
-            <summary>
-            
-            </summary>
-            <param name="context"></param>
+        <member name="M:JT808.Gateway.Authorization.JT808TokenFilter.InvokeAsync(Microsoft.AspNetCore.Http.EndpointFilterInvocationContext,Microsoft.AspNetCore.Http.EndpointFilterDelegate)">
+            <inheritdoc/>
         </member>
         <member name="T:JT808.Gateway.Extensions.JT808ReplyMessageExtensions">
             <summary>
@@ -91,6 +88,17 @@
             <summary>
             JT808网关注册扩展
             </summary>
+            <summary>
+            JT808网关注册扩展
+            </summary>
+        </member>
+        <member name="M:JT808.Gateway.JT808GatewayExtensions.UseJT808GatewayWebApi(Microsoft.AspNetCore.Routing.IEndpointRouteBuilder,System.Action{JT808.Gateway.JT808GatewayWebApiOptions})">
+            <summary>
+            添加JT808 WebApi
+            </summary>
+            <param name="app"></param>
+            <param name="optionsFactory"></param>
+            <returns></returns>
         </member>
         <member name="M:JT808.Gateway.JT808GatewayExtensions.AddGateway(JT808.Protocol.IJT808Builder,System.Action{JT808.Gateway.Abstractions.Configurations.JT808Configuration})">
             <summary>
@@ -161,6 +169,16 @@
             <param name="config"></param>
             <returns></returns>
         </member>
+        <member name="P:JT808.Gateway.JT808GatewayWebApiOptions.RoutePrefix">
+            <summary>
+            路由前缀
+            </summary>
+        </member>
+        <member name="P:JT808.Gateway.JT808GatewayWebApiOptions.VerifyAuthorization">
+            <summary>
+            是否验证鉴权
+            </summary>
+        </member>
         <member name="T:JT808.Gateway.JT808TcpServer">
             <summary>
             808 tcp服务器
@@ -191,100 +209,6 @@
             
             </summary>
             <param name="cancellationToken"></param>
-            <returns></returns>
-        </member>
-        <member name="T:JT808.Gateway.JT808WebApi">
-            <summary>
-            jt808 webapi
-            </summary>
-        </member>
-        <member name="F:JT808.Gateway.JT808WebApi.SessionManager">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="F:JT808.Gateway.JT808WebApi.BlacklistManager">
-            <summary>
-            
-            </summary>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.#ctor(JT808.Gateway.Session.JT808SessionManager,JT808.Gateway.Services.JT808BlacklistManager)">
-            <summary>
-            
-            </summary>
-            <param name="jT808SessionManager"></param>
-            <param name="jT808BlacklistManager"></param>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.Index">
-            <summary>
-            index
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.UnificationSend(JT808.Gateway.Abstractions.Dtos.JT808UnificationSendRequestDto)">
-            <summary>
-            统一下发设备消息服务
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.SessionTcpGetAll">
-            <summary>
-            会话服务-Tcp会话查询
-            </summary>
-            <returns></returns>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:JT808.Gateway.JT808WebApi.SessionTcpByPage(System.Int32,System.Int32)" -->
-        <member name="M:JT808.Gateway.JT808WebApi.QueryTcpSessionByTerminalPhoneNo(JT808.Gateway.Abstractions.Dtos.JT808TerminalPhoneNoDto)">
-            <summary>
-            会话服务-通过设备终端号查询对应会话
-            </summary>
-            <param name="parameter"></param>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.SessionTcpRemoveByTerminalPhoneNo(JT808.Gateway.Abstractions.Dtos.JT808TerminalPhoneNoDto)">
-            <summary>
-            会话服务-通过设备终端号移除对应会话
-            </summary>
-            <param name="parameter"></param>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.SessionUdpGetAll">
-            <summary>
-            会话服务-Udp会话查询
-            </summary>
-            <returns></returns>
-        </member>
-        <!-- Badly formed XML comment ignored for member "M:JT808.Gateway.JT808WebApi.SessionUdpByPage(System.Int32,System.Int32)" -->
-        <member name="M:JT808.Gateway.JT808WebApi.QueryUdpSessionByTerminalPhoneNo(JT808.Gateway.Abstractions.Dtos.JT808TerminalPhoneNoDto)">
-            <summary>
-            会话服务-通过设备终端号查询对应会话
-            </summary>
-            <param name="parameter"></param>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.SessionUdpRemoveByTerminalPhoneNo(JT808.Gateway.Abstractions.Dtos.JT808TerminalPhoneNoDto)">
-            <summary>
-            会话服务-通过设备终端号移除对应会话
-            </summary>
-            <param name="parameter"></param>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.BlacklistAdd(JT808.Gateway.Abstractions.Dtos.JT808TerminalPhoneNoDto)">
-            <summary>
-            黑名单添加
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.BlacklistRemove(JT808.Gateway.Abstractions.Dtos.JT808TerminalPhoneNoDto)">
-            <summary>
-            黑名单删除
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:JT808.Gateway.JT808WebApi.BlacklistGetAll">
-            <summary>
-            黑名单查询
-            </summary>
             <returns></returns>
         </member>
         <member name="T:JT808.Gateway.Services.JT808BlacklistManager">
