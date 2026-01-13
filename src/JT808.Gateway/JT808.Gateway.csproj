@@ -16,7 +16,7 @@
 
    <ItemGroup>
 	 <FrameworkReference Include="Microsoft.AspNetCore.App" />
-	 <PackageReference Include="System.IO.Pipelines" Version="8.0.0" />
+	 <PackageReference Include="System.IO.Pipelines" Version="10.0.1" />
    </ItemGroup>
 	
   <ItemGroup>
