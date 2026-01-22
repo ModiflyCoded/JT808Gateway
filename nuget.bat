@@ -1,1 +1,1 @@
-dotnet nuget push .\nupkgs\*.nupkg -k apikey -s https://api.nuget.org/v3/index.json
+dotnet nuget push .\nupkgs\*.nupkg --source "github"

@@ -79,7 +79,10 @@ namespace JT808.Gateway
         {
             var IPEndPoint = new System.Net.IPEndPoint(IPAddress.Any, ConfigurationMonitor.CurrentValue.TcpPort);
             server = new Socket(IPEndPoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
-            server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.NoDelay, true);
+
+            // in docker containers, calling this throws an exception. It either needs to be false or not set at all.
+            // server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.NoDelay, true);
+
             server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.KeepAlive, true);
             server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.ReceiveBuffer, ConfigurationMonitor.CurrentValue.MiniNumBufferSize);
             server.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.SendBuffer, ConfigurationMonitor.CurrentValue.MiniNumBufferSize);
@@ -102,6 +105,17 @@ namespace JT808.Gateway
                     try
                     {
                         var socket = await server.AcceptAsync(cancellationToken);
+
+                        // online claims state that in linux, we can call this once a connection has been accepted.
+                        try
+                        {
+                            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.NoDelay, true);
+                        }
+                        catch (Exception ex)
+                        {
+                            Logger.LogError(ex, $"[Set NoDelay Error]:{socket.RemoteEndPoint}");
+                        }
+
                         JT808TcpSession jT808TcpSession = new JT808TcpSession(socket);
                         SessionManager.TryAdd(jT808TcpSession);
                         await Task.Factory.StartNew(async (state) =>
