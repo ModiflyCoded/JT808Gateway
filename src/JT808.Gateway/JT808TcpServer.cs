@@ -106,16 +106,6 @@ namespace JT808.Gateway
                     {
                         var socket = await server.AcceptAsync(cancellationToken);
 
-                        // online claims state that in linux, we can call this once a connection has been accepted.
-                        try
-                        {
-                            socket.SetSocketOption(SocketOptionLevel.Socket, SocketOptionName.NoDelay, true);
-                        }
-                        catch (Exception ex)
-                        {
-                            Logger.LogError(ex, $"[Set NoDelay Error]:{socket.RemoteEndPoint}");
-                        }
-
                         JT808TcpSession jT808TcpSession = new JT808TcpSession(socket);
                         SessionManager.TryAdd(jT808TcpSession);
                         await Task.Factory.StartNew(async (state) =>
