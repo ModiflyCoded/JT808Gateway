@@ -18,6 +18,12 @@ namespace JT808.Gateway.Client
             JT808ClientRequest request = new JT808ClientRequest(package, minBufferSize);
             await client.SendAsync(request);
         }
+
+        public static async ValueTask SendRawBytesAsync(this JT808TcpClient client, byte[] bytes, int minBufferSize = 4096)
+        {
+            JT808ClientRequest request = new JT808ClientRequest(bytes);
+            await client.SendAsync(request);
+        }
     }
 
 }
